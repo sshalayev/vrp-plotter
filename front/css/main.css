@@ -1,0 +1,329 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Roboto", san-serif;
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 400;
+    line-height: 2rem;
+}
+
+h1 {
+    font-size: 3.4rem;
+    line-height: 4rem;
+    font-weight: 400;
+    margin: 1.6rem 0;
+}
+h1.max {
+    font-size: 4.5rem;
+    line-height: 4.8rem;
+    font-weight: 400;
+    margin: 2rem 0;
+}
+h2 {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 400;
+    margin: 1rem 0;
+}
+h3 {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    font-weight: 500;
+    margin: 0.8rem 0;
+}
+h4 {
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    font-weight: 400;
+    margin: 0.8rem 0;
+    color: rgba(0, 0, 0, 0.54);
+}
+h4.spaced {
+    line-height: 2.8rem;
+    color: rgba(0, 0, 0, 0.54);
+}
+p {
+    margin: 0.8rem 0;
+    word-break: normal;
+    white-space: normal;
+}
+p.spaced {
+    line-height: 2.4rem;
+}
+.caption-text {
+    font-size: 1.2rem;
+}
+.secondary-text {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 8px;
+}
+.ellipsed-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.semilight {
+    color: rgba(0, 0, 0, 0.54);
+}
+.light {
+    color: rgba(0, 0, 0, 0.38);
+}
+.inline-warning {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.06);
+    padding: 16px;
+    margin: 8px 8px 24px 8px;
+}
+code {
+    font-family: monospace;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.54);
+    white-space: pre;
+}
+.main-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+}
+.error-message {
+    font-size: 12px;
+}
+.sidenav-submenu {
+    background-color: #f9f9f9;
+
+}
+.sidenav-submenu--text {
+    font-size: 10pt;
+    margin-left: 60px;
+}
+.sidenav-header {
+    min-height: 112px;
+    background: url("/Content/img/sidenav-header.png") no-repeat;
+}
+.section-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    flex: auto;
+}
+
+.section-block {
+    margin: 24px;
+    border-radius: 2px;
+}
+
+.hspacing-left-16 {
+     margin-left: 16px;
+ }
+.hspacing-right-16 {
+    margin-right: 16px;
+}
+
+.vspacing-top-16 {
+    margin-top: 16px;
+}
+.vspacing-bottom-16 {
+    margin-bottom: 16px;
+}
+.block8 {
+    min-width: 8px;
+}
+.block16 {
+    min-width: 16px;
+}
+.block24 {
+    min-width: 24px;
+}
+.block40 {
+    min-width: 40px;
+}
+.block56 {
+    min-width: 56px;
+}
+.fab-add-report {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    transition: all 0.3s ease-out;
+}
+.fab-add-report-active {
+    transform: translateY(-192px);
+    transition: all 0.3s ease-out;
+}
+.toolbar-info-label {
+    font-size: 13px;
+    color: rgba(1,1,1,0.54);
+    margin-left: 8px;
+    margin-right: 4px;
+}
+.toolbar-info-content {
+    font-size: 14px;
+    color: rgba(1,1,1,0.87);
+    margin-left: 4px;
+    margin-right: 8px;
+}
+
+.bottom-panel {
+    position: absolute;
+    bottom: -265px;
+    left: 0;
+    right: 0;
+    height: 265px;
+    background-color: #FFFFFF;
+    border-top: 1px solid #cccccc;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 18;
+    transition: all 0.3s ease-out;
+}
+.bottom-panel-active {
+    bottom: 0;
+    transition: all 0.3s ease-out;
+}
+
+.login-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+}
+
+.login-container {
+    width: 360px;
+    margin-top: 24px;
+    position: relative;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.login-logo {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(/Content/img/archer-logo.png) center no-repeat;
+}
+.login-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.md-autocomplete-flat {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0 16px 8px 16px;
+    font-weight: 400;
+}
+.md-autocomplete-flat--input {
+    font-weight: 400;
+    padding: 0;
+}
+md-input-container {
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+md-option {
+    height: 40px;
+}
+md-option ._md-text {
+    font-size: 14px;
+}
+md-dialog {
+    overflow: hidden;
+}
+.md-dialog-content-box {
+    margin-right: -16px;
+    padding-top: 8px;
+    overflow-y: scroll;
+}
+.form-button-set {
+    padding: 8px 4px;
+    margin-top: 24px;
+    min-height: 52px;
+}
+.form-button {
+    min-height: 36px;
+    max-height: 36px;
+    min-width: 64px;
+    padding: 0 8px;
+    margin: 0 4px;
+}
+.form-block-container {
+    margin: 0;
+}
+.form-block {
+    margin: 0 8px;
+    min-height: 265px !important;
+    min-width: 360px;
+    flex: auto;
+}
+.form-block-grid {
+    margin: 8px;
+    min-width: 400px;
+    min-height: 265px;
+    flex: 1 1 560px;
+}
+.form-checkbox {
+    font-size: 14px;
+}
+.form-element-margin {
+    margin: 16px 16px 8px 16px;
+}
+.form-element-font {
+    font-size: 14px;
+    font-weight: 400;
+}
+.md-datepicker-error {
+    margin-top: 4px;
+    margin-left: 64px;
+}
+.md-whiteframe-0dp {
+    box-shadow: none; }
+
+.md-whiteframe-2dp {
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
+
+md-slider-container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+md-slider-container>:first-child:not(md-slider) {
+    margin-right: 16px;
+    margin-bottom: -6px;
+}
+md-slider-container>:last-child:not(md-slider) {
+    min-width: 25px;
+    max-width: 42px;
+    height: 25px;
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    transition-property: color,max-width;
+}
+.no-errors .md-errors-spacer {
+    min-height: 0;
+}

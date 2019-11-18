@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="VRPPlotter" class="dahsboard-back">
+<head>
+    <title ng-bind="pageTitle">{{pageTitle}}</title>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic&subset=latin,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/dist/shared.bundle.css" rel="stylesheet"/>
+    <link href="/dist/app.bundle.css" rel="stylesheet"/>
+
+    <script type="application/javascript" src="/dist/shared.bundle.js"></script>
+    <script type="application/javascript" src="/dist/app.bundle.js"></script>
+
+</head>
+<body id="main-ui-view">
+
+    <div ui-view id="level1-view" layout="column" class="main-container"></div>
+
+</body>
+</html>

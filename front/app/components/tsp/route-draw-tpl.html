@@ -1,0 +1,117 @@
+<div layout="column" flex>
+    <div class="algo-controls" layout="row" layout-align="space-between start">
+        <div layout="column" flex="60">
+            <div layout="row" layout-align="space-between center">
+                <div flex="45">
+                    <md-switch ng-model="ctrl.usePreset" aria-label="Use Preset">
+                        Preset Points
+                    </md-switch>
+                </div>
+                <div flex="45">
+                    <md-checkbox ng-model="ctrl.isClosed" aria-label="Closed route">
+                        Closed route
+                    </md-checkbox>
+                </div>
+            </div>
+            <div layout="column" flex ng-if="ctrl.usePreset">
+                <md-input-container class="md-block">
+                    <label>Points</label>
+                    <textarea ng-model="ctrl.preset" rows="3" max-rows="3"></textarea>
+                </md-input-container>
+            </div>
+            <div layout="column" flex ng-if="!ctrl.usePreset">
+                <md-slider-container>
+                    <span>Size</span>
+                    <md-slider min="500" max="1200" ng-model="ctrl.mapSize" aria-label="red" id="map-size-slider"
+                               class="md-warn">
+                    </md-slider>
+                    <md-input-container>
+                        <input type="number" ng-model="ctrl.mapSize" aria-label="map size" aria-controls="map-size-slider">
+                    </md-input-container>
+                </md-slider-container>
+                <md-slider-container>
+                    <span>Points</span>
+                    <md-slider min="4" max="100" ng-model="ctrl.pointsNumber" aria-label="red" id="points-number-slider"
+                               class="md-warn">
+                    </md-slider>
+                    <md-input-container>
+                        <input type="number" ng-model="ctrl.pointsNumber" aria-label="points number" aria-controls="points-number-slider">
+                    </md-input-container>
+                </md-slider-container>
+            </div>
+        </div>
+        <div layout="column" flex="30">
+            <div layout="row" layout-align="space-between center">
+                <div flex="45">
+                    <md-input-container class="no-errors">
+                        <label>max. T</label>
+                        <input type="number" ng-model="ctrl.maxTemp" aria-label="initial temperature">
+                    </md-input-container>
+                </div>
+                <div flex="45">
+                    <md-input-container class="no-errors">
+                        <label>min. T</label>
+                        <input type="number" ng-model="ctrl.minTemp" aria-label="minimal temperature">
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-align="space-between center">
+                <div flex></div>
+                <md-button class="md-primary" ng-click="ctrl.rebuildRoute()" aria-label="rebuild route" ng-disabled="ctrl.simAnneal && ctrl.simAnneal.isRunning">Repeat</md-button>
+                <md-button class="md-primary" ng-click="ctrl.rebuildRoute(true)" aria-label="rebuild route" ng-disabled="ctrl.simAnneal && ctrl.simAnneal.isRunning">Search</md-button>
+            </div>
+            <div layout="row" layout-align="center">
+                <div flex></div>
+                <md-button class="md-primary" ng-click="ctrl.addSolution()" aria-label="rebuild route" ng-disabled="!ctrl.preset">Add</md-button>
+                <md-button class="md-warn" ng-click="ctrl.stopRouteSearch()" aria-label="stop route search" ng-disabled="!ctrl.simAnneal || !ctrl.simAnneal.isRunning">Stop</md-button>
+            </div>
+        </div>
+    </div>
+    <div class="algo-benchmark"  ng-if="ctrl.bestRoute">
+        <div>
+            <p><strong>Permutations</strong></p>
+            <p>{{ctrl.bestRoute.limit | pownumber}} / {{ctrl.bestRoute.total | pownumber}}</p>
+        </div>
+        <md-divider></md-divider>
+        <div>
+            <p><strong>Duration</strong><br>{{ctrl.bestRoute.duration}}ms</p>
+        </div>
+        <md-divider></md-divider>
+        <div>
+            <p><strong>Single sample</strong><br>{{ctrl.bestRoute.bench}}ms</p>
+        </div>
+        <md-divider></md-divider>
+        <div>
+            <p><strong>Est. calc. time</strong><br>{{ctrl.bestRoute.estimate.years() | pownumber}} years</p>
+        </div>
+        <div>
+            <p><strong>Start cost</strong><br>{{ctrl.bestRoute.cost}}</p>
+        </div>
+    </div>
+    <!--<div class="algo-best-route" ng-if="ctrl.bestRoute && ctrl.pointsNumber < 10">
+        <div ng-repeat="item in ctrl.bestRoute.state track by $index">{{item.x}} x {{item.y}}</div>
+    </div>-->
+    <div class="algo-solutions">
+        <div layout="row"
+             layout-align="start center"
+             ng-repeat="solution in ctrl.simAnneal.solutions"
+             ng-mouseenter="ctrl.focusSolution($index)"
+             ng-mouseleave="ctrl.focusSolution(-1)" ng-click="ctrl.downloadSolution($index)">
+            <div class="legend-bullet" ng-style="{'background-color': solution.color}"></div>
+            <div flex>{{solution.cost}}</div>
+        </div>
+    </div>
+    <div class="algo-draw-scroller">
+        <div class="route-draw-container" ng-style="{'min-width': ctrl.mapSize + 'px', 'min-height': ctrl.mapSize + 'px'}">
+            <div class="route-info"></div>
+            <div class="route-solution"
+                 ng-repeat="solution in ctrl.simAnneal.solutions">
+                <canvas width="{{ctrl.mapSize}}" height="{{ctrl.mapSize}}" id="solution_{{$index}}"></canvas>
+                <div ng-init="ctrl.drawSolution($index)"></div>
+            </div>
+            <div class="route-current-search">
+                <canvas width="{{ctrl.mapSize}}" height="{{ctrl.mapSize}}" id="current_search"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

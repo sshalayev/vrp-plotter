@@ -1,0 +1,62 @@
+<div layout="column" ng-style="{'max-width': (ctrl.mapWidth + 160) + 'px'}" flex>
+    <div class="algo-controls" layout="row" layout-align="space-between start">
+        <div layout="column" flex="45">
+            <md-slider-container>
+                <span>Width</span>
+                <md-slider min="500" max="1200" ng-model="ctrl.mapWidth" aria-label="map width" class="md-warn"></md-slider>
+                <md-input-container>
+                    <input type="number" ng-model="ctrl.mapWidth" aria-label="map width" aria-controls="map-size-slider">
+                </md-input-container>
+            </md-slider-container>
+            <md-slider-container>
+                <span>Height</span>
+                <md-slider min="500" max="1200" ng-model="ctrl.mapHeight" aria-label="map height" class="md-warn"></md-slider>
+                <md-input-container>
+                    <input type="number" ng-model="ctrl.mapHeight" aria-label="map height" aria-controls="map-size-slider">
+                </md-input-container>
+            </md-slider-container>
+
+        </div>
+        <div layout="column" flex="45">
+            <md-slider-container>
+                <span>Points</span>
+                <md-slider min="4" max="300" ng-model="ctrl.pointCount" aria-label="points" class="md-warn"></md-slider>
+                <md-input-container>
+                    <input type="number" ng-model="ctrl.pointCount" aria-label="points number" aria-controls="points-number-slider">
+                </md-input-container>
+            </md-slider-container>
+            <md-slider-container>
+                <span>Clusters</span>
+                <md-slider min="2" max="10" ng-model="ctrl.clusterCount" aria-label="points" class="md-warn"></md-slider>
+                <md-input-container>
+                    <input type="number" ng-model="ctrl.clusterCount" aria-label="cluster count">
+                </md-input-container>
+            </md-slider-container>
+            <div layout="row" layout-align="center">
+                <div flex></div>
+                <md-button ng-click="ctrl.rebuild()" aria-label="rebuild">New</md-button>
+                <md-button ng-click="ctrl.resetClusters()" aria-label="reset clusters">Reset</md-button>
+                <md-button class="md-primary" ng-click="ctrl.runClusteringStep()" aria-label="run clustering step">Next</md-button>
+            </div>
+        </div>
+    </div>
+    <div class="algo-draw-scroller">
+        <div class="k-mean-container" ng-style="{'height': ctrl.mapHeight + 'px', 'width': ctrl.mapWidth + 'px'}">
+            <div class="k-mean-layer">
+                <div class="k-mean-point-wrapper">
+                    <div ng-repeat="point in ctrl.kmean.points" class="k-mean-point" ng-style="{'top': point.y + 'px', 'left': point.x + 'px'}"></div>
+                </div>
+            </div>
+            <div class="k-mean-layer" ng-repeat="cluster in ctrl.kmean.clusters" ng-style="{'z-index': (cluster.index + 1) * 10}">
+                <div class="k-mean-point-wrapper">
+                    <div class="k-mean-point" ng-repeat="point in cluster.points" ng-style="{'top': point.y + 'px', 'left': point.x + 'px', 'border-color': ctrl.colors[cluster.index]}"></div>
+                    <div class="k-mean-point k-mean-centroid"
+                         ng-style="{'top': cluster.centroid.y + 'px',
+                     'left': cluster.centroid.x + 'px',
+                     'border-color': ctrl.colors[cluster.index],
+                     'background-color': ctrl.colors[cluster.index]}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

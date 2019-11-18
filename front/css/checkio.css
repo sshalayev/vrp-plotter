@@ -1,0 +1,97 @@
+
+.ace-editor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.checkio-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+/* ------ LEFT SECTION ------ */
+.checkio-code {
+    padding: 8px 0;
+}
+.checkio-panel {
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 16px;
+}
+.checkio-toolbar {
+    min-height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 2px 0 16px;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.checkio-ace-container {
+    flex: auto;
+    background-color: #FFFFFF;
+    position: relative;
+}
+checkio-console {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: 8px 16px
+}
+.checkio-error {
+    font-family: monospace;
+    font-size: 14px;
+}
+/* ------ RIGHT SECTION ------ */
+.checkio-task {
+    background-color: #FAFAFA;
+}
+.checkio-tabs {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.checkio-tab-content {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 49px);
+}
+.checkio-description {
+    margin: 16px 16px 8px 16px;
+}
+.checkio-info {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin-right: -15px;
+}
+.checkio-results {
+    min-height: 176px;
+    max-height: 176px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-right: -15px;
+}
+.checkio-result-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 8px 16px;
+}
+.checkio-result-icon {
+    min-width: 56px;
+}
+.checkio-result-details {
+    display: flex;
+    flex-direction: column;
+    margin-top: -6px;
+}
+

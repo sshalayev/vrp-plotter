@@ -1,0 +1,53 @@
+{
+  "name": "VRPPlotter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack --env.development --progress --watch --colors",
+    "build": "./node_modules/.bin/webpack --env.development --display-modules",
+    "ver": "./node_modules/.bin/webpack --version",
+    "release": "./node_modules/.bin/webpack --env.production --display-modules"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-animate": "^1.5.7",
+    "angular-aria": "^1.5.8",
+    "angular-filter": "^0.5.16",
+    "angular-material": "^1.1.0",
+    "angular-messages": "^1.5.7",
+    "angular-resource": "^1.5.7",
+    "angular-sanitize": "^1.5.9",
+    "angular-ui-router": "^0.3.1",
+    "guid": "0.0.12",
+    "immutable": "^3.8.2",
+    "jquery": "^3.1.0",
+    "mathjs": "^5.1.1",
+    "moment": "^2.22.2"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "*",
+    "exports-loader": "*",
+    "expose-loader": "*",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "*",
+    "imports-loader": "*",
+    "json-loader": "*",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "pug-loader": "*",
+    "raw-loader": "0.5.1",
+    "resolve-url-loader": "*",
+    "sass-loader": "*",
+    "script-loader": "*",
+    "style-loader": "*",
+    "text-loader": "*",
+    "uglify-es": "^3.0.28",
+    "uglifyjs-webpack-plugin": "*",
+    "url-loader": "*",
+    "webpack": "^3.8.1",
+    "webpack-angular-resource-plugin": "*"
+  }
+}

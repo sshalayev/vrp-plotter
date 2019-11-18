@@ -1,0 +1,262 @@
+.algo-container {
+    flex: auto;
+}
+.algo-container > md-tabs {
+    background-color: #FFFFFF;
+    height: 100%;
+    min-width: 848px;
+    max-width: 90vw;
+}
+.algo-wrapper {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 16px 24px;
+}
+.algo-controls {
+    flex: 0 0 160px;
+    min-height: 160px;
+}
+.algo-benchmark {
+    flex: 0 0 80px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.algo-best-route {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-height: 56px;
+}
+.algo-best-route > div {
+    box-sizing: border-box;
+    min-width: 40px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .06);
+    margin: 4px;
+    padding: 4px;
+    font-size: 1rem;
+}
+.algo-benchmark > div {
+    flex: 0 0 15%;
+    box-sizing: border-box;
+    align-self: stretch;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.algo-draw-scroller {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+route-draw, k-mean {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+.route-draw-container {
+    flex: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 56px;
+    min-width: 848px;
+    min-height: 848px;
+}
+.route-point {
+    box-sizing: border-box;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-top: -3px;
+    border-radius: 50%;
+    border: 1px solid #FF9800;
+    position: absolute;
+    z-index: 500;
+}
+.route-point.route-point-first {
+    background-color: #689F38;
+}
+.route-point.route-point-last {
+    background-color: #D32F2F;
+}
+.route-point > span {
+    font-size: 1rem;
+    margin-top: -10px;
+}
+.route-info {
+    position: absolute;
+    top: -32px;
+    left: 8px;
+    right: 8px;
+    padding: 8px;
+    color: rgba(0, 0, 0, .78);
+    font-size: 1rem;
+    z-index: 15;
+}
+.route-current-search, .route-solution {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+}
+.route-solution {
+    background-color: rgba(255, 255, 255, .5);
+}
+.route-solution.focused-solution {
+    background-color: rgba(255, 255, 255, 1);
+    /*box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .12);*/
+    z-index: 200;
+}
+.route-current-search {
+    z-index: 25;
+}
+.algo-solutions {
+    flex: 0 0 56px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, .78);
+    font-size: 1.1rem;
+    line-height: 28px;
+}
+.legend-bullet {
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 8px;
+}
+.k-mean-container {
+    position: relative;
+    margin: 0 -24px;
+    background-color: #ffffff;
+}
+.k-mean-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.k-mean-point-wrapper {
+    flex: auto;
+    position: relative;
+}
+.k-mean-point {
+    box-sizing: border-box;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-top: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, .38);
+    position: absolute;
+}
+.k-mean-centroid {
+    border-radius: 0;
+    transform: rotate(45deg);
+}
+.vrp-controls {
+    min-height: 160px;
+}
+.vrp-draw-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 848px;
+    min-height: 848px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.vrp-point-container {
+    min-width: 800px;
+    min-height: 800px;
+    position: relative;
+    border: 1px dashed rgba(0, 0, 0, .12);
+}
+.vrp-point {
+    position: absolute;
+    z-index: 5;
+    width: 24px;
+    height: 24px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border: 3px solid rgba(0, 0, 0, .12);
+    border-radius: 50%;
+    line-height: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
+.vrp-distance {
+    background-color: #455A64;
+    color: #FFFFFF !important;
+    font-weight: normal;
+    border: 0;
+    border-radius: 2px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+}
+.vrp-vehicle {
+    color: #D32F2F;
+    font-size: 24px;
+}
+.vrp-pickup {
+    color: #1565C0;
+    border-color: #1565C0;
+}
+.vrp-delivery {
+    color: #558B2F;
+    border-color: #558B2F;
+}
+.vrp-capacity {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 24px;
+    max-width: 24px;
+    height: 32px;
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
+.vrp-capacity-link {
+    flex: 0 0 50%;
+    min-width: 1px;
+    width: 1px;
+    min-height: 16px;
+    border-left: 1px dashed rgba(0, 0, 0, .26);
+}
+.vrp-capacity-data {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, .26);
+    min-height: 16px;
+    line-height: 16px;
+    font-size: 1.1rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.vrp-point-hidden {
+    z-index: -1;
+    transform: scale(0);
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
+

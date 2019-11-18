@@ -1,0 +1,33 @@
+<div layout="column" flex>
+    <div class="algo-controls" layout="row" layout-align="space-between start">
+        <div layout="column" flex="50">
+            <md-input-container class="md-block">
+                <label>VRP</label>
+                <textarea ng-model="ctrl.vrpData" rows="6" max-rows="6"></textarea>
+            </md-input-container>
+        </div>
+        <div layout="column" flex="40">
+            <div layout="column" flex>
+                <md-switch ng-model="ctrl.filters.showDist" aria-label="Show Distances">
+                    Show distances
+                </md-switch>
+                <md-switch ng-model="ctrl.filters.showCapDemand" aria-label="Show required capacity">
+                    Show required capacity
+                </md-switch>
+            </div>
+            <div layout="row">
+                <div flex></div>
+                <md-button ng-click="ctrl.plotter.reset()" aria-label="reset" ng-disabled="!ctrl.plotter">Reset</md-button>
+                <md-button class="md-primary" ng-click="ctrl.plotSolution()" aria-label="draw Solution" ng-disabled="!ctrl.plotter">Solution</md-button>
+                <md-button class="md-primary" ng-click="ctrl.plotVRP()" aria-label="draw VRP" ng-disabled="!ctrl.plotter">VRP</md-button>
+            </div>
+        </div>
+    </div>
+    <div class="algo-draw-scroller">
+        <div class="vrp-draw-container">
+            <div class="vrp-point-container">
+                <canvas width="800" height="800"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
