@@ -14,8 +14,6 @@ const vrp = angular.module('VRPPlotter', [
     require('angular-filter')
 ]);
 
-const algotpl = require('./templates/algo.html');
-console.log(algotpl);
 vrp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
         $locationProvider.html5Mode({
@@ -45,7 +43,6 @@ vrp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThe
                     $rootScope.pageTitle = 'Routing algorithms demo';
                 }
             });
-        console.log($stateProvider);
     }]);
 
 vrp.run(

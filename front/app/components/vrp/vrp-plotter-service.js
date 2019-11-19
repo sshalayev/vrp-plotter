@@ -61,6 +61,11 @@ module.exports = function(vrp){
                 this.colorIterator = COLORS.values();
                 this.sf = 1;
                 this.vrp = null;
+                this.best = null;
+            }
+
+            get isEmpty(){
+                return !this.vrp;
             }
 
             getColor(){
@@ -146,29 +151,48 @@ module.exports = function(vrp){
                 if (!vrp.solutions){
                     return this;
                 }
-                const bestSolution = this.getBestSolution(vrp);
-                bestSolution.routes.forEach((route, idx) => {
-                    const points = route.act.reduce((res, act) => {
+                this.best = this.getBestSolution(vrp);
+                this.best.routes.forEach((route, idx) => {
+                    const vehicle = this.vehicles.get(route.vehicleId);
+                    if (!vehicle){
+                        return;
+                    }
+                    const summary = route.act.reduce((res, act) => {
+                        const prevLoc = res.points[res.points.length - 1];
+                        let loc = null;
+                        let capacity = 0;
                         if (this.shipments.has(act.jobId)){
                             const shp = this.shipments.get(act.jobId);
-                            res.push(act.type.startsWith('pickup') ? shp.pickup : shp.delivery)
+                            loc = shp.delivery;
+                            if (act.type.startsWith('pickup')){
+                                loc = shp.pickup;
+                                capacity = shp.capacity
+                            }
                         }
                         if (this.services.has(act.jobId)){
                             const svc = this.services.get(act.jobId);
-                            res.push(svc.location)
+                            loc = svc.location;
+                            capacity = svc.capacity;
                         }
+                        res.points.push(loc);
+                        res.distance += prevLoc.getDistance(loc);
+                        res.capacity += capacity;
                         return res;
-                    }, []);
-                    if (this.vehicles.has(route.vehicleId)){
-                        const vhcLoc = this.vehicles.get(route.vehicleId);
-                        vhcLoc.start && points.unshift(vhcLoc.start);
-                        vhcLoc.end && points.push(vhcLoc.end);
-                    }
-                    this.routes.set('route' + idx, {color: this.getColor(), points})
+                    }, {
+                        points: [vehicle.start],
+                        distance: 0,
+                        capacity: 0
+                    });
+                    summary.distance += summary.points[summary.points.length - 1].getDistance(vehicle.end || vehicle.start);
+                    summary.points.push(vehicle.end || vehicle.start);
+                    summary.color = this.getColor();
+                    summary.vehicleId = route.vehicleId;
+
+                    this.routes.set('route' + idx, summary)
                 });
                 return this;
             }
-            setVRP(vrp){
+            setVRP(vrp = {}){
                 this.vrp = vrp;
                 return this.setVehicles(vrp)
                     .setShipments(vrp)
@@ -209,8 +233,8 @@ module.exports = function(vrp){
                     `<div class="vrp-capacity-data">${capacity}</div></div>`);
                 const rp = loc.getScaled(this.sf);
                 elem.css({
-                    top: rp.y + 12 + 'px',
-                    left: rp.x - 12 + 'px'
+                    top: rp.y + 10 + 'px',
+                    left: rp.x - 10 + 'px'
                 }).addClass('vrp-point-hidden');
                 this.element.append(elem);
                 return elem;
@@ -238,8 +262,8 @@ module.exports = function(vrp){
                     `<div class="vrp-capacity-data">${capacity}</div></div>`);
                 const rp = ploc.getScaled(this.sf);
                 elem.css({
-                    top: rp.y + 12 + 'px',
-                    left: rp.x - 12 + 'px'
+                    top: rp.y + 8 + 'px',
+                    left: rp.x - 8 + 'px'
                 }).addClass('vrp-point-hidden');
                 this.element.append(elem);
                 return elem;
@@ -296,20 +320,20 @@ module.exports = function(vrp){
             }
 
             plotSolution(){
-                const bestSolution = this.vrp.solutions.reduce((res, sol) => {
-                    return sol.cost < res.cost ? sol : res;
-                }, {cost: Number.MAX_VALUE});
-                console.log(bestSolution);
-                this.drawSolution(bestSolution);
+                this.drawSolution();
             }
 
             reset(){
                 this.shipments.clear();
                 this.services.clear();
                 this.vehicles.clear();
+                this.routes.clear();
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                this.element.find('.vrp-point').remove();
+                this.element.find('.vrp-point, .vrp-capacity').remove();
                 this.sf = 1;
+                this.vrp = null;
+                this.best = null;
+                return this;
             }
 
             setScale(vrp){

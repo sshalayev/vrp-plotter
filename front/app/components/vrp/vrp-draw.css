@@ -1,0 +1,137 @@
+.vrp-controls {
+    flex: 0 0 160px;
+    min-height: 160px;
+}
+.vrp-draw-scroller {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.vrp-draw-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 848px;
+    min-height: 848px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.vrp-point-container {
+    min-width: 800px;
+    min-height: 800px;
+    position: relative;
+    border: 1px dashed rgba(0, 0, 0, .12);
+}
+.vrp-point {
+    position: absolute;
+    z-index: 5;
+    width: 20px;
+    height: 20px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, .12);
+    border-radius: 50%;
+    line-height: 16px;
+    font-size: 1rem;
+    text-align: center;
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
+.vrp-distance {
+    background-color: #455A64;
+    color: #FFFFFF !important;
+    font-weight: normal;
+    border: 0;
+    border-radius: 2px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+}
+.vrp-vehicle {
+    color: #D32F2F;
+    font-size: 24px;
+}
+.vrp-pickup {
+    color: #1565C0;
+    border-color: #1565C0;
+}
+.vrp-delivery {
+    color: #558B2F;
+    border-color: #558B2F;
+}
+.vrp-capacity {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 24px;
+    max-width: 24px;
+    height: 32px;
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
+.vrp-capacity-link {
+    flex: 0 0 50%;
+    min-width: 1px;
+    width: 1px;
+    min-height: 16px;
+    border-left: 1px dashed rgba(0, 0, 0, .26);
+}
+.vrp-capacity-data {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, .26);
+    min-height: 16px;
+    line-height: 16px;
+    font-size: 1.1rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.vrp-point-hidden {
+    z-index: -1;
+    transform: scale(0);
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
+.vrp-routes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 8px 0;
+    min-height: 48px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+.vrp-routes-item {
+    display: flex;
+    min-height: 32px;
+    min-width: 248px;
+    max-width: 248px;
+    margin: 2px;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, .26);
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, .06);
+}
+.vrp-routes-item > div:not(.vrp-route-bullet) {
+    min-width: 64px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    font-size: 1.1rem;
+}
+.vrp-route-bullet {
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+    margin: 0 16px 0 8px;
+    background-color: rgba(0, 0, 0, .12);
+    border-radius: 50%;
+}
+.vrp-cost {
+    min-height: 32px;
+    line-height: 32px;
+}
+.vrp-cost > span {
+    color: #009688;
+    font-weight: bold;
+}

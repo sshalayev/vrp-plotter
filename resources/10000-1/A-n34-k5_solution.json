@@ -1,0 +1,1309 @@
+{
+    "problemType": {
+        "fleetSize": "FINITE",
+        "fleetComposition": "HETEROGENEOUS"
+    },
+    "vehicleTypes": [
+        {
+            "id": "VHT100",
+            "capacity": [
+                100
+            ],
+            "costs": {
+                "fixed": 0,
+                "distance": 1,
+                "time": 0,
+                "wait": 0,
+                "service": 0
+            }
+        }
+    ],
+    "vehicles": [
+        {
+            "id": "vhcA",
+            "startLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "endLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "returnToDepot": true,
+            "timeSchedule": {
+                "start": 0,
+                "end": 1.7976931348623157e+308
+            }
+        },
+        {
+            "id": "vhcB",
+            "startLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "endLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "returnToDepot": true,
+            "timeSchedule": {
+                "start": 0,
+                "end": 1.7976931348623157e+308
+            }
+        },
+        {
+            "id": "vhcC",
+            "startLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "endLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "returnToDepot": true,
+            "timeSchedule": {
+                "start": 0,
+                "end": 1.7976931348623157e+308
+            }
+        },
+        {
+            "id": "vhcD",
+            "startLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "endLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "returnToDepot": true,
+            "timeSchedule": {
+                "start": 0,
+                "end": 1.7976931348623157e+308
+            }
+        },
+        {
+            "id": "vhcE",
+            "startLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "endLocation": {
+                "id": "[x=73][y=39]",
+                "coord": {
+                    "x": 73,
+                    "y": 39
+                }
+            },
+            "returnToDepot": true,
+            "timeSchedule": {
+                "start": 0,
+                "end": 1.7976931348623157e+308
+            }
+        }
+    ],
+    "shipments": [],
+    "services": [
+        {
+            "id": "svcA",
+            "type": "delivery",
+            "location": {
+                "id": "[x=67][y=91]",
+                "coord": {
+                    "x": 67,
+                    "y": 91
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                23
+            ]
+        },
+        {
+            "id": "svcB",
+            "type": "delivery",
+            "location": {
+                "id": "[x=39][y=21]",
+                "coord": {
+                    "x": 39,
+                    "y": 21
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                3
+            ]
+        },
+        {
+            "id": "svcC",
+            "type": "delivery",
+            "location": {
+                "id": "[x=3][y=9]",
+                "coord": {
+                    "x": 3,
+                    "y": 9
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                24
+            ]
+        },
+        {
+            "id": "svcD",
+            "type": "delivery",
+            "location": {
+                "id": "[x=97][y=15]",
+                "coord": {
+                    "x": 97,
+                    "y": 15
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                15
+            ]
+        },
+        {
+            "id": "svcE",
+            "type": "delivery",
+            "location": {
+                "id": "[x=91][y=65]",
+                "coord": {
+                    "x": 91,
+                    "y": 65
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                15
+            ]
+        },
+        {
+            "id": "svcF",
+            "type": "delivery",
+            "location": {
+                "id": "[x=55][y=75]",
+                "coord": {
+                    "x": 55,
+                    "y": 75
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                24
+            ]
+        },
+        {
+            "id": "svcG",
+            "type": "delivery",
+            "location": {
+                "id": "[x=55][y=71]",
+                "coord": {
+                    "x": 55,
+                    "y": 71
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                7
+            ]
+        },
+        {
+            "id": "svcH",
+            "type": "delivery",
+            "location": {
+                "id": "[x=57][y=85]",
+                "coord": {
+                    "x": 57,
+                    "y": 85
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                25
+            ]
+        },
+        {
+            "id": "svcI",
+            "type": "delivery",
+            "location": {
+                "id": "[x=21][y=15]",
+                "coord": {
+                    "x": 21,
+                    "y": 15
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                13
+            ]
+        },
+        {
+            "id": "svcJ",
+            "type": "delivery",
+            "location": {
+                "id": "[x=47][y=57]",
+                "coord": {
+                    "x": 47,
+                    "y": 57
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                5
+            ]
+        },
+        {
+            "id": "svcK",
+            "type": "delivery",
+            "location": {
+                "id": "[x=51][y=97]",
+                "coord": {
+                    "x": 51,
+                    "y": 97
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                7
+            ]
+        },
+        {
+            "id": "svcL",
+            "type": "delivery",
+            "location": {
+                "id": "[x=11][y=11]",
+                "coord": {
+                    "x": 11,
+                    "y": 11
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                5
+            ]
+        },
+        {
+            "id": "svcM",
+            "type": "delivery",
+            "location": {
+                "id": "[x=43][y=59]",
+                "coord": {
+                    "x": 43,
+                    "y": 59
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                14
+            ]
+        },
+        {
+            "id": "svcN",
+            "type": "delivery",
+            "location": {
+                "id": "[x=63][y=69]",
+                "coord": {
+                    "x": 63,
+                    "y": 69
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                13
+            ]
+        },
+        {
+            "id": "svcO",
+            "type": "delivery",
+            "location": {
+                "id": "[x=55][y=77]",
+                "coord": {
+                    "x": 55,
+                    "y": 77
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                5
+            ]
+        },
+        {
+            "id": "svcP",
+            "type": "delivery",
+            "location": {
+                "id": "[x=35][y=11]",
+                "coord": {
+                    "x": 35,
+                    "y": 11
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                24
+            ]
+        },
+        {
+            "id": "svcQ",
+            "type": "delivery",
+            "location": {
+                "id": "[x=27][y=91]",
+                "coord": {
+                    "x": 27,
+                    "y": 91
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                15
+            ]
+        },
+        {
+            "id": "svcR",
+            "type": "delivery",
+            "location": {
+                "id": "[x=49][y=25]",
+                "coord": {
+                    "x": 49,
+                    "y": 25
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                9
+            ]
+        },
+        {
+            "id": "svcS",
+            "type": "delivery",
+            "location": {
+                "id": "[x=29][y=93]",
+                "coord": {
+                    "x": 29,
+                    "y": 93
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                16
+            ]
+        },
+        {
+            "id": "svcT",
+            "type": "delivery",
+            "location": {
+                "id": "[x=71][y=27]",
+                "coord": {
+                    "x": 71,
+                    "y": 27
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                13
+            ]
+        },
+        {
+            "id": "svcU",
+            "type": "delivery",
+            "location": {
+                "id": "[x=31][y=43]",
+                "coord": {
+                    "x": 31,
+                    "y": 43
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                16
+            ]
+        },
+        {
+            "id": "svcV",
+            "type": "delivery",
+            "location": {
+                "id": "[x=27][y=9]",
+                "coord": {
+                    "x": 27,
+                    "y": 9
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                13
+            ]
+        },
+        {
+            "id": "svcW",
+            "type": "delivery",
+            "location": {
+                "id": "[x=67][y=99]",
+                "coord": {
+                    "x": 67,
+                    "y": 99
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                24
+            ]
+        },
+        {
+            "id": "svcX",
+            "type": "delivery",
+            "location": {
+                "id": "[x=87][y=81]",
+                "coord": {
+                    "x": 87,
+                    "y": 81
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                20
+            ]
+        },
+        {
+            "id": "svcY",
+            "type": "delivery",
+            "location": {
+                "id": "[x=23][y=81]",
+                "coord": {
+                    "x": 23,
+                    "y": 81
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                23
+            ]
+        },
+        {
+            "id": "svcZ",
+            "type": "delivery",
+            "location": {
+                "id": "[x=89][y=33]",
+                "coord": {
+                    "x": 89,
+                    "y": 33
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                20
+            ]
+        },
+        {
+            "id": "svcAA",
+            "type": "delivery",
+            "location": {
+                "id": "[x=71][y=91]",
+                "coord": {
+                    "x": 71,
+                    "y": 91
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                3
+            ]
+        },
+        {
+            "id": "svcAB",
+            "type": "delivery",
+            "location": {
+                "id": "[x=19][y=77]",
+                "coord": {
+                    "x": 19,
+                    "y": 77
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                15
+            ]
+        },
+        {
+            "id": "svcAC",
+            "type": "delivery",
+            "location": {
+                "id": "[x=65][y=77]",
+                "coord": {
+                    "x": 65,
+                    "y": 77
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                12
+            ]
+        },
+        {
+            "id": "svcAD",
+            "type": "delivery",
+            "location": {
+                "id": "[x=87][y=79]",
+                "coord": {
+                    "x": 87,
+                    "y": 79
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                19
+            ]
+        },
+        {
+            "id": "svcAE",
+            "type": "delivery",
+            "location": {
+                "id": "[x=19][y=83]",
+                "coord": {
+                    "x": 19,
+                    "y": 83
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                4
+            ]
+        },
+        {
+            "id": "svcAF",
+            "type": "delivery",
+            "location": {
+                "id": "[x=1][y=59]",
+                "coord": {
+                    "x": 1,
+                    "y": 59
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                15
+            ]
+        },
+        {
+            "id": "svcAG",
+            "type": "delivery",
+            "location": {
+                "id": "[x=55][y=7]",
+                "coord": {
+                    "x": 55,
+                    "y": 7
+                }
+            },
+            "duration": 5,
+            "timeWindows": [
+                {
+                    "start": 0,
+                    "end": 1.7976931348623157e+308
+                }
+            ],
+            "capacityDemand": [
+                1
+            ]
+        }
+    ],
+    "solutions": [
+        {
+            "cost": 780.9360751738254,
+            "routes": [
+                {
+                    "vehicleId": "vhcB",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcB",
+                            "arrTime": 38.47076812334269,
+                            "endTime": 43.47076812334269
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcI",
+                            "arrTime": 62.44443408435296,
+                            "endTime": 67.44443408435296
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcL",
+                            "arrTime": 78.21476369862197,
+                            "endTime": 83.21476369862197
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcC",
+                            "arrTime": 91.46097494985729,
+                            "endTime": 96.46097494985729
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcV",
+                            "arrTime": 120.46097494985729,
+                            "endTime": 125.46097494985729
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcP",
+                            "arrTime": 133.7071862010926,
+                            "endTime": 138.7071862010926
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAG",
+                            "arrTime": 159.10326425546376,
+                            "endTime": 164.10326425546376
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcT",
+                            "arrTime": 189.71576120519515,
+                            "endTime": 194.71576120519515
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcC",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcR",
+                            "arrTime": 27.784887978899608,
+                            "endTime": 32.784887978899604
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcU",
+                            "arrTime": 58.240732101615315,
+                            "endTime": 63.240732101615315
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAF",
+                            "arrTime": 97.24073210161532,
+                            "endTime": 102.24073210161532
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAB",
+                            "arrTime": 127.69657622433104,
+                            "endTime": 132.69657622433104
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAE",
+                            "arrTime": 138.69657622433104,
+                            "endTime": 143.69657622433104
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcY",
+                            "arrTime": 148.1687121793306,
+                            "endTime": 153.1687121793306
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcM",
+                            "arrTime": 182.90084967396763,
+                            "endTime": 187.90084967396763
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcD",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAA",
+                            "arrTime": 52.03844732503075,
+                            "endTime": 57.03844732503075
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcA",
+                            "arrTime": 61.03844732503075,
+                            "endTime": 66.03844732503075
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcW",
+                            "arrTime": 74.03844732503075,
+                            "endTime": 79.03844732503075
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcK",
+                            "arrTime": 95.16296282162784,
+                            "endTime": 100.16296282162784
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcS",
+                            "arrTime": 122.52364259662573,
+                            "endTime": 127.52364259662573
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcQ",
+                            "arrTime": 130.35206972137192,
+                            "endTime": 135.35206972137192
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcJ",
+                            "arrTime": 174.79823556800397,
+                            "endTime": 179.79823556800397
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcE",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcD",
+                            "arrTime": 33.94112549695428,
+                            "endTime": 38.94112549695428
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcZ",
+                            "arrTime": 58.638841100546486,
+                            "endTime": 63.638841100546486
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcE",
+                            "arrTime": 95.70128018430928,
+                            "endTime": 100.70128018430928
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAD",
+                            "arrTime": 115.26149996287032,
+                            "endTime": 120.26149996287032
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcX",
+                            "arrTime": 122.26149996287032,
+                            "endTime": 127.26149996287032
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcA",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcG",
+                            "arrTime": 36.71511950137164,
+                            "endTime": 41.71511950137164
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcF",
+                            "arrTime": 45.71511950137164,
+                            "endTime": 50.71511950137164
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcO",
+                            "arrTime": 52.71511950137164,
+                            "endTime": 57.71511950137164
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcH",
+                            "arrTime": 65.96133075260695,
+                            "endTime": 70.96133075260695
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAC",
+                            "arrTime": 82.27503925159172,
+                            "endTime": 87.27503925159172
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcN",
+                            "arrTime": 95.52125050282704,
+                            "endTime": 100.52125050282704
+                        }
+                    ]
+                }
+            ],
+            "unassignedJobs": []
+        },
+        {
+            "cost": 780.9360751738252,
+            "routes": [
+                {
+                    "vehicleId": "vhcB",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcB",
+                            "arrTime": 38.47076812334269,
+                            "endTime": 43.47076812334269
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcI",
+                            "arrTime": 62.44443408435296,
+                            "endTime": 67.44443408435296
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcL",
+                            "arrTime": 78.21476369862197,
+                            "endTime": 83.21476369862197
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcC",
+                            "arrTime": 91.46097494985729,
+                            "endTime": 96.46097494985729
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcV",
+                            "arrTime": 120.46097494985729,
+                            "endTime": 125.46097494985729
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcP",
+                            "arrTime": 133.7071862010926,
+                            "endTime": 138.7071862010926
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAG",
+                            "arrTime": 159.10326425546376,
+                            "endTime": 164.10326425546376
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcT",
+                            "arrTime": 189.71576120519515,
+                            "endTime": 194.71576120519515
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcC",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcX",
+                            "arrTime": 44.27188724235731,
+                            "endTime": 49.27188724235731
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAD",
+                            "arrTime": 51.27188724235731,
+                            "endTime": 56.27188724235731
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcE",
+                            "arrTime": 70.83210702091834,
+                            "endTime": 75.83210702091834
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcZ",
+                            "arrTime": 107.89454610468114,
+                            "endTime": 112.89454610468114
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcD",
+                            "arrTime": 132.59226170827336,
+                            "endTime": 137.59226170827336
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcD",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAA",
+                            "arrTime": 52.03844732503075,
+                            "endTime": 57.03844732503075
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcA",
+                            "arrTime": 61.03844732503075,
+                            "endTime": 66.03844732503075
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcW",
+                            "arrTime": 74.03844732503075,
+                            "endTime": 79.03844732503075
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcK",
+                            "arrTime": 95.16296282162784,
+                            "endTime": 100.16296282162784
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcS",
+                            "arrTime": 122.52364259662573,
+                            "endTime": 127.52364259662573
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcQ",
+                            "arrTime": 130.35206972137192,
+                            "endTime": 135.35206972137192
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcJ",
+                            "arrTime": 174.79823556800397,
+                            "endTime": 179.79823556800397
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcE",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcR",
+                            "arrTime": 27.784887978899608,
+                            "endTime": 32.784887978899604
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcU",
+                            "arrTime": 58.240732101615315,
+                            "endTime": 63.240732101615315
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAF",
+                            "arrTime": 97.24073210161532,
+                            "endTime": 102.24073210161532
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAB",
+                            "arrTime": 127.69657622433104,
+                            "endTime": 132.69657622433104
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAE",
+                            "arrTime": 138.69657622433104,
+                            "endTime": 143.69657622433104
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcY",
+                            "arrTime": 148.1687121793306,
+                            "endTime": 153.1687121793306
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcM",
+                            "arrTime": 182.90084967396763,
+                            "endTime": 187.90084967396763
+                        }
+                    ]
+                },
+                {
+                    "vehicleId": "vhcA",
+                    "start": 0,
+                    "end": null,
+                    "act": [
+                        {
+                            "type": "delivery",
+                            "jobId": "svcG",
+                            "arrTime": 36.71511950137164,
+                            "endTime": 41.71511950137164
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcF",
+                            "arrTime": 45.71511950137164,
+                            "endTime": 50.71511950137164
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcO",
+                            "arrTime": 52.71511950137164,
+                            "endTime": 57.71511950137164
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcH",
+                            "arrTime": 65.96133075260695,
+                            "endTime": 70.96133075260695
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcAC",
+                            "arrTime": 82.27503925159172,
+                            "endTime": 87.27503925159172
+                        },
+                        {
+                            "type": "delivery",
+                            "jobId": "svcN",
+                            "arrTime": 95.52125050282704,
+                            "endTime": 100.52125050282704
+                        }
+                    ]
+                }
+            ],
+            "unassignedJobs": []
+        }
+    ]
+}

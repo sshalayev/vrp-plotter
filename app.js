@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
+const api = require('./routes/api');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const serveStatic = require('serve-static');
@@ -18,6 +19,10 @@ app.use(methodOverride());
 app.use(serveStatic(path.join(__dirname + '/public')));
 app.use(router);
 
+router.get('/api/vrp', api.getSet);
+router.get('/api/vrp/all/:folder', api.getSummary);
+router.get('/api/vrp/:solution_set', api.getList);
+router.get('/api/vrp/:solution_set/:solution_name', api.getSolution);
 router.get('/*', routes.index);
 
 app.listen(4444, '0.0.0.0', function () {

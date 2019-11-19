@@ -1,7 +1,32 @@
 <div layout="column" flex>
-    <div class="algo-controls" layout="row" layout-align="space-between start">
+    <div class="vrp-controls" layout="row" layout-align="space-between start">
         <div layout="column" flex="50">
-            <md-input-container class="md-block">
+            <md-switch ng-model="ctrl.filters.showCustomSolutionInput" aria-label="Show Distances">
+                Show custom solution input
+            </md-switch>
+            <div layout="row" layout-align="space-between center" ng-show="!ctrl.filters.showCustomSolutionInput">
+                <md-input-container flex="45">
+                    <label>Solution Set</label>
+                    <md-select name="solution_set"
+                               placeholder="select solution set"
+                               ng-model="ctrl.selectedSet"
+                               ng-change="ctrl.handleSetChange()">
+                        <md-option ng-value="item" ng-repeat="item in ctrl.solutionSets" ng-selected="$first">{{item}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="45">
+                    <label>Solution</label>
+                    <md-select name="solution"
+                               placeholder="select solution"
+                               ng-model="ctrl.selectedSolution"
+                               ng-change="ctrl.handleSolutionChange()"
+                               ng-disabled="ctrl.solutionListLoading">
+                        <md-option md-option-empty ng-value="null">none</md-option>
+                        <md-option ng-value="item" ng-repeat="item in ctrl.solutionList">{{item}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-input-container class="md-block" ng-show="ctrl.filters.showCustomSolutionInput">
                 <label>VRP</label>
                 <textarea ng-model="ctrl.vrpData" rows="6" max-rows="6"></textarea>
             </md-input-container>
@@ -23,7 +48,18 @@
             </div>
         </div>
     </div>
-    <div class="algo-draw-scroller">
+    <div class="vrp-cost">
+        Solution cost: <span>{{ctrl.plotter && ctrl.plotter.best ? ctrl.plotter.best.cost : 0 | number : 2}}</span>
+    </div>
+    <div class="vrp-routes">
+        <div class="vrp-routes-item" ng-repeat="item in ctrl.routes">
+            <div class="vrp-route-bullet" ng-style="{'background-color': item.color}"></div>
+            <div><strong>{{item.vehicleId}}</strong></div>
+            <div>d: {{item.distance | number : 2}}</div>
+            <div>c: {{item.capacity}}</div>
+        </div>
+    </div>
+    <div class="vrp-draw-scroller">
         <div class="vrp-draw-container">
             <div class="vrp-point-container">
                 <canvas width="800" height="800"></canvas>
