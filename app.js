@@ -20,7 +20,8 @@ app.use(serveStatic(path.join(__dirname + '/public')));
 app.use(router);
 
 router.get('/api/vrp', api.getSet);
-router.get('/api/vrp/all/:folder', api.getSummary);
+router.get('/api/vrp/all', api.getFullSummary);
+router.get('/api/vrp/all/:folder', api.getSetSummary);
 router.get('/api/vrp/:solution_set', api.getList);
 router.get('/api/vrp/:solution_set/:solution_name', api.getSolution);
 router.get('/*', routes.index);

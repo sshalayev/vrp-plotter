@@ -39,10 +39,20 @@ exports.getSolution = async (req, res) => {
     }
 };
 
-exports.getSummary = async (req, res) => {
+exports.getSetSummary = async (req, res) => {
     try {
         const sset = req.params ? req.params.folder : await getSolutionSets()[0];
-        const data = await getSetSolutions(sset);
+        const data = await getSetSummary(sset);
+        res.status(200).send(data)
+    } catch(err){
+        console.warn(err);
+        res.status(400).send(err);
+    }
+};
+
+exports.getFullSummary = async (req, res) => {
+    try {
+        const data = await getFullSummary();
         res.status(200).send(data)
     } catch(err){
         console.warn(err);
@@ -74,11 +84,22 @@ function getSolution(setName, vrpName){
     })
 }
 
-async function getSetSolutions(setName){
+async function getSetSummary(setName){
     const solutions = await getSolutionList(setName);
     const res = {};
-    solutions.forEach(async (sname) => {
-        res[sname] = await getSolution(setName, sname);
-    });
+    for(let sname of solutions){
+        const solution = await getSolution(setName, sname);
+        res[sname.slice(0, -5)] = solution.cost;
+    }
     return res;
+}
+
+async function getFullSummary(){
+    const sets = await getSolutionSets();
+    const summaryMap = ImmMap().asMutable();
+    for(let sset of sets){
+        const summary = await getSetSummary(sset);
+        summaryMap.set(sset, summary);
+    }
+    return summaryMap.toJS()
 }
