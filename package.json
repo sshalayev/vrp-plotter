@@ -4,7 +4,7 @@
   "description": "Small web application for plotting VRP solutions",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "server": "node app.js"
   },
   "repository": {
     "type": "git",
