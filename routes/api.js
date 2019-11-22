@@ -62,7 +62,7 @@ exports.getFullSummary = async (req, res) => {
 
 function getSolutionSets(){
     return fs.promises.readdir(resourcePath, {withFileTypes: true}).then((delist) => {
-        return delist.filter((de) => de.isDirectory()).map((de) => de.name)
+        return delist.filter((de) => de.isDirectory() || de.isSymbolicLink()).map((de) => de.name)
     })
 }
 
