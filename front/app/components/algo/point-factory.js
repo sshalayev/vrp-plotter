@@ -33,6 +33,10 @@ module.exports = (vrp) => {
                 const copy = new this.constructor(this.x * sf, this.y * sf);
                 return Object.assign(copy, this._getPropsCopy());
             }
+            getTransformed(xTransFn, yTransFn){
+                const copy = new this.constructor(xTransFn(this.x), yTransFn(this.y));
+                return Object.assign(copy, this._getPropsCopy());
+            }
             clone(){
                 const copy = new this.constructor(this.x, this.y);
                 return Object.assign(copy, this._getPropsCopy());
@@ -43,7 +47,7 @@ module.exports = (vrp) => {
                     && this.y === rpoint.y;
             }
             toString(){
-                return this.x.toFixed(2) + 'x' + this.y.toFixed();
+                return `[x=${this.x}][y=${this.y}]`;
             }
             _getPropsCopy(){
                 return Object.keys(this).reduce((res, key) => {
@@ -52,25 +56,6 @@ module.exports = (vrp) => {
                     }
                     return res;
                 }, {})
-            }
-        }
-
-        class RoutePoint extends RPoint {
-            constructor(x, y){
-                super(x, y);
-                this.cssStyle = new Set();
-                this.name = null;
-                this.cssStyle.add('vrp-point');
-            }
-
-            setCss(css){
-                this.cssStyle.add(css);
-                return this;
-            }
-
-            setName(name){
-                this.name = name;
-                return this;
             }
         }
 
@@ -119,13 +104,9 @@ module.exports = (vrp) => {
 
         this.RPoint = RPoint;
         this.RVector = RVector;
-        this.RoutePoint = RoutePoint;
 
         this.getPoint = (x, y) => {
             return new RPoint(x, y);
-        };
-        this.getRoutePoint = (x, y) => {
-            return new RoutePoint(x, y);
         };
         this.getRandomPoints = (amount, maxX, maxY) => {
             return new Array(amount).fill(0).map(() => new RPoint(this.getRandomCoord(maxX), this.getRandomCoord(maxY)));

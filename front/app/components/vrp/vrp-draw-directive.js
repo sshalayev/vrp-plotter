@@ -59,13 +59,13 @@ module.exports = function(vrp) {
         setRequest.send().then((resp) => {
             this.solutionSets = resp.data.slice();
         });
-        fullSummaryRequest.send().then((resp) => {
-            const summary = Immutable.fromJS(resp.data);
-            const columns = summary.keySeq().toArray().sort();
-            const rows = summary.flatten(0).keySeq().toArray().sort();
-            const grid = [['problem', ...columns]].concat(rows.map((row) => [row, ...columns.map((col) => summary.getIn([col, row]))]));
-            console.log(grid.map((row) => row.join('\t')).join('\n'));
-        });
+        // fullSummaryRequest.send().then((resp) => {
+        //     const summary = Immutable.fromJS(resp.data);
+        //     const columns = summary.keySeq().toArray().sort();
+        //     const rows = summary.flatten(0).keySeq().toArray().sort();
+        //     const grid = [['problem', ...columns]].concat(rows.map((row) => [row, ...columns.map((col) => summary.getIn([col, row]))]));
+        //     console.log(grid.map((row) => row.join('\t')).join('\n'));
+        // });
 
         $scope.$watch('ctrl.filters.showDist', (nval) => {
             $('.vrp-distance').toggleClass('vrp-point-hidden', !nval);

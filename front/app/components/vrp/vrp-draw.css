@@ -59,6 +59,9 @@
     color: #558B2F;
     border-color: #558B2F;
 }
+.vrp-unassigned {
+    opacity: .6;
+}
 .vrp-capacity {
     position: absolute;
     z-index: 5;

@@ -33,13 +33,13 @@ module.exports = function(vrp){
         class RoutePoint extends pointFactory.RPoint {
             constructor(x, y){
                 super(x, y);
-                this.cssStyle = new Set();
+                this.cssStyle = [];
                 this.name = null;
-                this.cssStyle.add('vrp-point');
+                this.cssStyle.push('vrp-point');
             }
 
             setCss(css){
-                this.cssStyle.add(css);
+                this.cssStyle.push(css);
                 return this;
             }
 
@@ -59,7 +59,8 @@ module.exports = function(vrp){
                 this.vehicles = new Map();
                 this.routes = new Map();
                 this.colorIterator = COLORS.values();
-                this.sf = 1;
+                this.transX = (x) => x;
+                this.transY = (y) => y;
                 this.vrp = null;
                 this.best = null;
             }
@@ -95,7 +96,8 @@ module.exports = function(vrp){
                 vrp.vehicles.forEach((vhc) => {
                     const vhcLoc = {
                         start: null,
-                        end: null
+                        end: null,
+                        rtp: vhc.returnToDepot
                     };
                     if (vhc.startLocation){
                         const {x, y} = vhc.startLocation.coord;
@@ -110,6 +112,9 @@ module.exports = function(vrp){
                             .setCss('material-icons')
                             .setCss('vrp-vehicle')
                             .setName('local_shipping');
+                        if (!vhc.returnToDepot && vhcLoc.end.equals(vhcLoc.start)){
+                            vhcLoc.end = null;
+                        }
                     }
                     this.vehicles.set(vhc.id, vhcLoc);
                 });
@@ -183,32 +188,45 @@ module.exports = function(vrp){
                         distance: 0,
                         capacity: 0
                     });
-                    summary.distance += summary.points[summary.points.length - 1].getDistance(vehicle.end || vehicle.start);
-                    summary.points.push(vehicle.end || vehicle.start);
+                    if (vehicle.end){
+                        summary.distance += summary.points[summary.points.length - 1].getDistance(vehicle.end);
+                        summary.points.push(vehicle.end);
+                    }
                     summary.color = this.getColor();
                     summary.vehicleId = route.vehicleId;
 
                     this.routes.set('route' + idx, summary)
                 });
+                this.best.unassignedJobs.forEach((job) => {
+                    if (this.shipments.has(job.id)){
+                        const shp = this.shipments.get(job.id);
+                        shp.delivery.setCss('vrp-unassigned');
+                        shp.pickup.setCss('vrp-unassigned');
+                    }
+                    if (this.services.has(job.id)){
+                        const svc = this.services.get(job.id);
+                        svc.location.setCss('vrp-unassigned');
+                    }
+                });
                 return this;
             }
             setVRP(vrp = {}){
                 this.vrp = vrp;
-                return this.setVehicles(vrp)
+                return this.setScale(vrp)
+                    .setVehicles(vrp)
                     .setShipments(vrp)
                     .setServices(vrp)
-                    .setRoutes(vrp)
-                    .setScale(vrp);
+                    .setRoutes(vrp);
             }
 
             addPoint(point){
-                const realPoint = point.getScaled(this.sf);
+                const realPoint = point.getTransformed(this.transX, this.transY);
                 const {x, y} = realPoint;
                 const elem = this.getPointElem(point);
                 elem.css({
                     top: y - 12 + 'px',
                     left: x - 12 + 'px'
-                });
+                }).attr('id', point.toString());
                 this.element.append(elem);
                 return elem;
             }
@@ -231,7 +249,7 @@ module.exports = function(vrp){
                 const {location: loc, capacity: capacity} = service;
                 const elem = angular.element('<div class="vrp-capacity"><div class="vrp-capacity-link"></div>' +
                     `<div class="vrp-capacity-data">${capacity}</div></div>`);
-                const rp = loc.getScaled(this.sf);
+                const rp = loc.getTransformed(this.transX, this.transY);
                 elem.css({
                     top: rp.y + 10 + 'px',
                     left: rp.x - 10 + 'px'
@@ -260,10 +278,10 @@ module.exports = function(vrp){
                 const {pickup: ploc, capacity: capacity} = shipment;
                 const elem = angular.element('<div class="vrp-capacity"><div class="vrp-capacity-link"></div>' +
                     `<div class="vrp-capacity-data">${capacity}</div></div>`);
-                const rp = ploc.getScaled(this.sf);
+                const rp = ploc.getTransformed(this.transX, this.transY);
                 elem.css({
                     top: rp.y + 8 + 'px',
-                    left: rp.x - 8 + 'px'
+                    left: rp.x - 16 + 'px'
                 }).addClass('vrp-point-hidden');
                 this.element.append(elem);
                 return elem;
@@ -276,7 +294,7 @@ module.exports = function(vrp){
                 this.ctx.lineJoin = 'round';
                 this.ctx.setLineDash(color ? [] : [8, 8]);
 
-                const realPoints = points.map((point) => point.getScaled(this.sf));
+                const realPoints = points.map((point) => point.getTransformed(this.transX, this.transY));
 
                 this.ctx.beginPath();
                 this.ctx.moveTo(realPoints[0].x, realPoints[0].y);
@@ -330,7 +348,8 @@ module.exports = function(vrp){
                 this.routes.clear();
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 this.element.find('.vrp-point, .vrp-capacity').remove();
-                this.sf = 1;
+                this.transX = (x) => x;
+                this.transY = (y) => y;
                 this.vrp = null;
                 this.best = null;
                 return this;
@@ -338,37 +357,88 @@ module.exports = function(vrp){
 
             setScale(vrp){
                 if (vrp){
-                    const vhcMax = vrp.vehicles.map((vhc) => {
-                        let smax = 0;
-                        let emax = 0;
+                    const vhcLocs = vrp.vehicles.reduce((res, vhc) => {
                         if (vhc.startLocation){
                             let {x, y} = vhc.startLocation.coord;
-                            smax = Math.max(x, y)
+                            res[0].push(x);
+                            res[1].push(y);
                         }
                         if (vhc.endLocation){
                             let {x, y} = vhc.endLocation.coord;
-                            emax = Math.max(x, y)
+                            res[0].push(x);
+                            res[1].push(y);
                         }
-                        return Math.max(smax, emax);
-                    }).sort((a, b) => b - a)[0] || 0;
+                        return res;
+                    }, [[], []]);
 
-                    const svcMax = vrp.services.map((svc) => Math.max(svc.location.coord.x, svc.location.coord.y)).sort((a, b) => b - a)[0] || 0;
+                    const svcLocs = vrp.services.reduce((res, svc) => {
+                        const {x, y} = svc.location.coord;
+                        res[0].push(x);
+                        res[1].push(y);
+                        return res;
+                    }, [[], []]);
 
-                    const shpMax = vrp.shipments.map((shp) => {
-                        let pmax = 0;
-                        let dmax = 0;
+                    const shpLocs = vrp.shipments.reduce((res, shp) => {
                         if (shp.pickup.location){
                             let {x, y} = shp.pickup.location.coord;
-                            pmax = Math.max(x, y)
+                            res[0].push(x);
+                            res[1].push(y);
                         }
                         if (shp.delivery.location){
                             let {x, y} = shp.delivery.location.coord;
-                            dmax = Math.max(x, y)
+                            res[0].push(x);
+                            res[1].push(y);
                         }
-                        return Math.max(pmax, dmax);
-                    }).sort((a, b) => b - a)[0] || 0;
+                    }, [[], []]);
 
-                    this.sf = this.canvas.width / Math.max(vhcMax, svcMax, shpMax);
+                    const xMinMax = vhcLocs[0].concat(svcLocs[0]).concat(shpLocs[0]).sort((a, b) => a - b);
+                    const yMinMax = vhcLocs[1].concat(svcLocs[1]).concat(shpLocs[1]).sort((a, b) => a - b);
+                    const ymin = yMinMax.shift();
+                    const ymax = yMinMax.pop();
+                    const xmin = xMinMax.shift();
+                    const xmax = xMinMax.pop();
+                    const maxDim = Math.max((xmax-xmin), (ymax-ymin));
+
+                    console.log([xmin, xmax, ymin, ymax, maxDim]);
+
+                    // const vhcMax = vrp.vehicles.map((vhc) => {
+                    //     let smax = 0;
+                    //     let emax = 0;
+                    //     if (vhc.startLocation){
+                    //         let {x, y} = vhc.startLocation.coord;
+                    //         smax = Math.max(x, y)
+                    //     }
+                    //     if (vhc.endLocation){
+                    //         let {x, y} = vhc.endLocation.coord;
+                    //         emax = Math.max(x, y)
+                    //     }
+                    //     return Math.max(smax, emax);
+                    // }).sort((a, b) => b - a)[0] || 0;
+                    //
+                    // const svcMax = vrp.services.map((svc) => Math.max(svc.location.coord.x, svc.location.coord.y)).sort((a, b) => b - a)[0] || 0;
+                    //
+                    // const shpMax = vrp.shipments.map((shp) => {
+                    //     let pmax = 0;
+                    //     let dmax = 0;
+                    //     if (shp.pickup.location){
+                    //         let {x, y} = shp.pickup.location.coord;
+                    //         pmax = Math.max(x, y)
+                    //     }
+                    //     if (shp.delivery.location){
+                    //         let {x, y} = shp.delivery.location.coord;
+                    //         dmax = Math.max(x, y)
+                    //     }
+                    //     return Math.max(pmax, dmax);
+                    // }).sort((a, b) => b - a)[0] || 0;
+
+                    const scale = this.canvas.width / maxDim;
+                    console.log(`Scale: ${scale}`);
+                    this.transX = (x) => {
+                        return (x - xmin) * scale;
+                    };
+                    this.transY = (y) => {
+                        return (y - ymin) * scale;
+                    };
                 }
                 return this;
             }
