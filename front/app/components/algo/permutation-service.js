@@ -113,6 +113,24 @@ module.exports = function(vrp){
                     return v;
                 }).sort((a, b) => a.idx - b.idx).map((v) => v.cell);
             }
+
+            static getAllCombination(items, combSize){
+                if (items.length < 1 || combSize < 1){
+                    return []
+                }
+                if (combSize === 1){
+                    return items.map((item) => [item]);
+                }
+                const _items = [...items];
+                const combinations = [];
+                while(_items.length > 1){
+                    const a = _items.pop();
+                    for(let b of _items){
+                        combinations.push([a, b])
+                    }
+                }
+                return combinations;
+            }
         }
         window.Permutation = Permutation;
         return Permutation;

@@ -1,0 +1,39 @@
+<div layout="column" flex>
+    <div class="dbs-controls" layout="row" layout-align="space-between start">
+        <div layout="column" flex="40">
+            <md-slider-container ng-if="ctrl.randomPoints">
+                <span>Points</span>
+                <md-slider min="50" max="500" ng-model="ctrl.pointCount" aria-label="point count" class="md-warn"></md-slider>
+                <md-input-container>
+                    <input type="number" ng-model="ctrl.pointCount" aria-label="point count">
+                </md-input-container>
+            </md-slider-container>
+            <md-input-container class="md-block" ng-show="!ctrl.randomPoints">
+                <label>VRP</label>
+                <textarea ng-model="ctrl.rawPoints" rows="6" max-rows="6"></textarea>
+            </md-input-container>
+        </div>
+        <div layout="column" flex="50">
+            <div flex></div>
+            <div layout="row">
+                <div flex>
+                    <md-switch ng-model="ctrl.randomPoints" aria-label="use random points">
+                        random points
+                    </md-switch>
+                </div>
+                <md-button ng-click="ctrl.resetPoints()" aria-label="reset">Reset</md-button>
+                <md-button class="md-primary" ng-click="ctrl.resetClusters()" aria-label="cluster points">Cluster</md-button>
+            </div>
+        </div>
+    </div>
+    <div class="dbs-draw-scroller">
+        <div class="dbs-draw-container">
+            <div class="dbs-point-container">
+                <div class="dbs-point"
+                     ng-repeat="point in ctrl.points"
+                     id="{{point.toString()}}"
+                     ng-style="{'top': point.y + 'px', 'left': point.x + 'px'}"></div>
+            </div>
+        </div>
+    </div>
+</div>

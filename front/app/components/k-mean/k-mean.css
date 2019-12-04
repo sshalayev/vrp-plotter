@@ -1,0 +1,32 @@
+.k-mean-container {
+    position: relative;
+    margin: 0 -24px;
+    background-color: #ffffff;
+}
+.k-mean-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.k-mean-point-wrapper {
+    flex: auto;
+    position: relative;
+}
+.k-mean-point {
+    box-sizing: border-box;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-top: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, .54);
+    position: absolute;
+}
+.k-mean-centroid {
+    border-radius: 0;
+    transform: rotate(45deg);
+}

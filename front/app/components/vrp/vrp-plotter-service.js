@@ -389,6 +389,7 @@ module.exports = function(vrp){
                             res[0].push(x);
                             res[1].push(y);
                         }
+                        return res;
                     }, [[], []]);
 
                     const xMinMax = vhcLocs[0].concat(svcLocs[0]).concat(shpLocs[0]).sort((a, b) => a - b);

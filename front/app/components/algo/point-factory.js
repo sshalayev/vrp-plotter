@@ -109,7 +109,12 @@ module.exports = (vrp) => {
             return new RPoint(x, y);
         };
         this.getRandomPoints = (amount, maxX, maxY) => {
-            return new Array(amount).fill(0).map(() => new RPoint(this.getRandomCoord(maxX), this.getRandomCoord(maxY)));
+            const points = Immutable.Set().asMutable();
+            while(points.size < amount){
+                const pt = new RPoint(this.getRandomCoord(maxX), this.getRandomCoord(maxY));
+                points.add(pt);
+            }
+            return points.valueSeq().toArray();
         };
         this.getRandomPoint = (maxX, maxY) => {
             return new RPoint(this.getRandomCoord(maxX), this.getRandomCoord(maxY))

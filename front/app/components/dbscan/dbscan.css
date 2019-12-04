@@ -1,0 +1,37 @@
+.dbs-controls {
+    flex: 0 0 160px;
+    min-height: 160px;
+}
+.dbs-draw-scroller {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dbs-draw-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 848px;
+    min-height: 848px;
+    background-color: rgba(255, 255, 255, 1);
+}
+.dbs-point-container {
+    min-width: 800px;
+    min-height: 800px;
+    position: relative;
+}
+.dbs-point {
+    position: absolute;
+    z-index: 5;
+    width: 4px;
+    height: 4px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, .54);
+    border-radius: 50%;
+    line-height: 16px;
+    font-size: 1rem;
+    text-align: center;
+    transition: all .25s cubic-bezier(.25,.8,.25,1);
+}
