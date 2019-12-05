@@ -43,7 +43,7 @@ module.exports = (vrp) => {
                 $('.dbs-point').removeClass(className);
             });
             this.clusterStyleMap.clear();
-            this.clusters = $dbscan.cluster(this.points).filter((cluster) => cluster.getPoints().length > 1);
+            this.clusters = $dbscan.cluster(this.points, 5).filter((cluster) => cluster.getPoints().length > 1);
             console.log(this.clusters)
             this.clusters.forEach((cluster) => {
                 const className = this.style.next().value;

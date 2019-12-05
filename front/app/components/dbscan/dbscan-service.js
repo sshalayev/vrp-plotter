@@ -7,7 +7,8 @@ module.exports = (vrp) => {
         const _epsFactor = 0.8;
         const _sampleCount = 100;
         const _pointStatus = {
-            NOISE: 0,
+            NOISE: -1,
+            NOT_VISITED: 0,
             PART_OF_CLUSTER: 1
         };
 
@@ -41,11 +42,19 @@ module.exports = (vrp) => {
                 return this.points.valueSeq().toArray();
             }
 
+            setPoints(points){
+                points.forEach((pt) => {
+                    this.points.add(pt)
+                });
+                return this;
+            }
+
             equals(obj){
                 if (obj === this) return true;
                 if(!obj || obj.constructor !== this.constructor) return false;
                 return this.points.size === obj.points.size
-                    && this.points.intersect(obj.points).size === this.points.size
+                    && this.points.every((pt) => obj.points.has(pt))
+                    && obj.points.every((pt) => this.points.has(pt))
             }
         }
 
@@ -74,64 +83,37 @@ module.exports = (vrp) => {
                 return this;
             }
 
-            cluster(points) {
+            cluster(pts){
+                const start = Date.now();
                 const clusters = [];
-                const visited = Immutable.Map().asMutable();
-                console.log(this.getNeighbors(points[0], points))
-                points.forEach((point) => {
-                    if (!visited.has(point)) {
-                        const neighbors = this.getNeighbors(point, points);
-                        if (neighbors.length >= this.minPts) {
-                            const cluster = new Cluster();
-                            clusters.push(this.expandCluster(cluster, point, neighbors, points, visited));
-                        }
-                    } else {
-                        visited.set(point, _pointStatus.NOISE)
+                const points = Immutable.Set(pts).asMutable();
+                let counter = 0;
+                while(points.size > 0 && ++counter < 1000){
+                    const base = getRandomPoint(points.toArray());
+                    const npoints = this.findNeighbors(base, points.delete(base));
+                    if (!npoints.length){
+                        continue;
                     }
-                });
+                    const cluster = new Cluster();
+                    cluster.addPoint(base);
+                    npoints.forEach((npt) => {
+                        cluster.addPoint(npt);
+                    });
+                    clusters.push(cluster);
+                }
+                console.log(`PTS: ${pts.length} EPS: ${this.eps} CL: ${clusters.length} MS: ${Date.now() - start}`);
                 return clusters;
             }
 
-            expandCluster(cluster, point, neighbors, points, visited) {
-                cluster.addPoint(point);
-                visited.set(point, _pointStatus.PART_OF_CLUSTER);
-                let seeds = neighbors.slice(1);
-                seeds.forEach((current) => {
-                    if (!visited.has(current)) {
-                        let currentNeighbors = this.getNeighbors(current, points);
-                        if (currentNeighbors.length >= this.minPts) {
-                            seeds = this.merge(seeds, currentNeighbors);
-                        }
-                    }
-                    if (visited.get(current) === _pointStatus.NOISE) {
-                        visited.set(current, _pointStatus.PART_OF_CLUSTER);
-                        cluster.addPoint(current);
-                    }
-                });
-                return cluster;
-            }
-
-            getNeighbors(point, points) {
-                return points.reduce((res, neighbor) => {
-                    if (point !== neighbor && this.distanceCalculator(neighbor, point) <= this.eps) {
-                        res.push(neighbor);
+            findNeighbors(point, points){
+                return points.toArray().reduce((res, pt) => {
+                    if(this.distanceCalculator(pt, point) <= this.eps){
+                        points.delete(pt);
+                        res.push(pt);
+                        res.push(...this.findNeighbors(pt, points));
                     }
                     return res;
                 }, []);
-            }
-
-            _merge(one, two) {
-                const oneSet = new Set(one);
-                two.forEach((item) => {
-                    if (!oneSet.has(item)) {
-                        one.push(item)
-                    }
-                });
-                return one;
-            }
-
-            merge(one, two){
-                return Immutable.Set.of(one).union(two).valueSeq().toArray()
             }
 
             static euclideanDistance (ptA, ptB) {
@@ -140,11 +122,24 @@ module.exports = (vrp) => {
 
         }
 
-        this.cluster = (points) => {
-            const eps = sample(points);
-            console.log(eps);
-            const dbscan = new JSDBSCAN(eps);
-            return dbscan.cluster(points);
+        this.cluster = (points, clusterCount) => {
+            sample(points);
+            let clusters = [];
+            let fuse = 0;
+            let eps = 2;
+            while (eps < 600){
+                if (fuse > 20){
+                    break;
+                }
+                const dbscan = new JSDBSCAN(eps);
+                clusters = dbscan.cluster(points);
+
+                if (clusters.length === 1){
+                    fuse++
+                }
+                eps += 2;
+            }
+            return clusters;
         };
 
         function _sample(points){
@@ -159,13 +154,19 @@ module.exports = (vrp) => {
         }
 
         function sample(points){
-            console.log('sample start');
             const dists = $permutation.getAllCombination(points, 2).map((pair) => pair[0].getDistance(pair[1])).sort((a,b) => a - b);
             const mid = dists.slice(Math.round(dists.length / 3), Math.round(dists.length * 2 / 3));
+            const dsum = dists.reduce((res, dist) => res + dist);
             const sum = mid.reduce((res, dist) => res + dist);
-            const eps = ((sum / mid.length) - dists[0]) * _epsFactor;
-            console.log('sample finished ' + eps);
+            const eps = ((sum / mid.length) - mid[0]) * _epsFactor;
+            console.log(`FAVG: ${dsum / dists.length} FMIN: ${dists[0]} FMAX: ${dists[dists.length - 1]}`);
+            console.log(`MAVG: ${sum / mid.length} MMIN: ${mid[0]} MMAX: ${mid[mid.length - 1]}`);
             return eps;
+        }
+
+        function getRandomPoint(points){
+            const rand = Math.floor(Math.random() * points.length);
+            return points[rand];
         }
     }
 };
