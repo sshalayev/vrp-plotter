@@ -19,7 +19,8 @@ module.exports = (vrp) => {
     function DbscanController($scope, $timeout, $dbscan, $colordef, pointFactory){
         const STYLES = ['red-back', 'blue-back', 'orange-back', 'lime-back', 'purple-back', 'aqua-back', 'yellow-back', 'green-back', 'pink-back', 'cyan-back'];
         const COLORS = ['#F44336', '#2196F3', '#FF9800', '#8BC34A', '#9C27B0', '#009688', '#FFC107', '#4CAF50', '#E91E63', '#00BCD4'];
-        this.pointCount = 100;
+        this.pointCount = 300;
+        this.clusterCount = 5;
         this.randomPoints = true;
         this.rawPoints = null;
         this.clusterStyleMap = Immutable.Map().asMutable();
@@ -43,8 +44,7 @@ module.exports = (vrp) => {
                 $('.dbs-point').removeClass(className);
             });
             this.clusterStyleMap.clear();
-            this.clusters = $dbscan.cluster(this.points, 5).filter((cluster) => cluster.getPoints().length > 1);
-            console.log(this.clusters)
+            this.clusters = $dbscan.cluster(this.points, this.clusterCount).filter((cluster) => cluster.getPoints().length > 1);
             this.clusters.forEach((cluster) => {
                 const className = this.style.next().value;
                 this.clusterStyleMap.set(cluster, className);

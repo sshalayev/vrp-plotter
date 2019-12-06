@@ -4,7 +4,7 @@ module.exports = (vrp) => {
 
     function dbscanService($permutation){
         const _points = [];
-        const _epsFactor = 0.8;
+        const _epsFactor = 0.6;
         const _sampleCount = 100;
         const _pointStatus = {
             NOISE: -1,
@@ -32,6 +32,14 @@ module.exports = (vrp) => {
         class Cluster {
             constructor() {
                 this.points = Immutable.Set().asMutable();
+            }
+
+            get length(){
+                return this.points.size
+            }
+
+            get size(){
+                return this.points.size
             }
 
             addPoint(point) {
@@ -91,7 +99,7 @@ module.exports = (vrp) => {
                 while(points.size > 0 && ++counter < 1000){
                     const base = getRandomPoint(points.toArray());
                     const npoints = this.findNeighbors(base, points.delete(base));
-                    if (!npoints.length){
+                    if (npoints.length < this.minPts){
                         continue;
                     }
                     const cluster = new Cluster();
@@ -101,7 +109,7 @@ module.exports = (vrp) => {
                     });
                     clusters.push(cluster);
                 }
-                console.log(`PTS: ${pts.length} EPS: ${this.eps} CL: ${clusters.length} MS: ${Date.now() - start}`);
+                //console.log(`${this.eps};${clusters.length}`);
                 return clusters;
             }
 
@@ -122,51 +130,92 @@ module.exports = (vrp) => {
 
         }
 
-        this.cluster = (points, clusterCount) => {
-            sample(points);
+        this.cluster = (points, clusterCount, noiseRate = 0.3) => {
+            matrixSample(points);
             let clusters = [];
             let fuse = 0;
             let eps = 2;
+            let bestEps = 2;
+            let max = -Infinity;
+
             while (eps < 600){
-                if (fuse > 20){
+                if (fuse > 5){
                     break;
                 }
                 const dbscan = new JSDBSCAN(eps);
-                clusters = dbscan.cluster(points);
-
-                if (clusters.length === 1){
+                const currentClusters = dbscan.cluster(points);
+                const noise = 1 - (currentClusters.reduce((res, cluster) => res + cluster.size, 0) / points.length);
+                const diff = Math.abs(clusterCount - currentClusters.length);
+                if (max < currentClusters.length){
+                    max = currentClusters.length;
+                }
+                if (currentClusters.length === 1 && max > currentClusters.length){
                     fuse++
                 }
-                eps += 2;
+                if (diff < Math.abs(clusterCount - clusters.length) && noise < noiseRate){
+                    clusters = currentClusters;
+                    bestEps = eps;
+                }
+
+                eps += 0.5;
             }
+            console.log('Best eps: ' + bestEps);
             return clusters;
         };
-
-        function _sample(points){
-            let min = Number.MAX_VALUE, sum = 0;
-            for (let i = 0; i < _sampleCount; i++) {
-                const [pt1, pt2] = $permutation.getRandomPermutation(points);
-                const dist = pt1.getDistance(pt2);
-                if (dist < min) min = dist;
-                sum += dist
-            }
-            return ((sum / _sampleCount) - min) * _epsFactor
-        }
 
         function sample(points){
             const dists = $permutation.getAllCombination(points, 2).map((pair) => pair[0].getDistance(pair[1])).sort((a,b) => a - b);
             const mid = dists.slice(Math.round(dists.length / 3), Math.round(dists.length * 2 / 3));
             const dsum = dists.reduce((res, dist) => res + dist);
             const sum = mid.reduce((res, dist) => res + dist);
+            const deps = ((dsum / dists.length) - dists[0]) * _epsFactor;
             const eps = ((sum / mid.length) - mid[0]) * _epsFactor;
-            console.log(`FAVG: ${dsum / dists.length} FMIN: ${dists[0]} FMAX: ${dists[dists.length - 1]}`);
-            console.log(`MAVG: ${sum / mid.length} MMIN: ${mid[0]} MMAX: ${mid[mid.length - 1]}`);
+            console.log(`fAVG: ${dsum / dists.length} fMIN: ${dists[0]} fMAX: ${dists[dists.length - 1]} fEPS: ${deps}`);
+            console.log(`mAVG: ${sum / mid.length} mMIN: ${mid[0]} mMAX: ${mid[mid.length - 1]} mEPS: ${eps}`);
             return eps;
+        }
+
+        function matrixSample(points){
+            const knn = 3;
+            const matrix = Immutable.Map().asMutable();
+            const dists = [];
+            let maxDist = 0;
+            let minDist = Number.MAX_VALUE;
+            $permutation.getAllCombination(points, 2).forEach((pair) => {
+                const [a, b] = pair;
+                const dist = a.getDistance(b);
+                dists.push(dist);
+                matrix.setIn([a, b], dist);
+                matrix.setIn([b, a], dist);
+                if (dist > maxDist){
+                    maxDist = dist;
+                }
+                if (dist < minDist){
+                    minDist = dist;
+                }
+            });
+            const vari = getVariance(dists, true);
+            const stddev = Math.sqrt(vari);
+            console.log('Variance: ' + vari);
+            console.log('Deviation: ' + stddev);
         }
 
         function getRandomPoint(points){
             const rand = Math.floor(Math.random() * points.length);
             return points[rand];
+        }
+
+        function getMean(values){
+            if (!values || !values.length) return NaN;
+            return values.reduce((r, v) => r + v, 0) / values.length;
+        }
+
+        function getVariance(values, bias){
+            if (!values || !values.length) return NaN;
+
+            const mean = getMean(values);
+            const n = values.length - +bias;
+            return values.reduce((r, v) => r + Math.pow(v - mean, 2), 0) / n
         }
     }
 };
