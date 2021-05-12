@@ -24,7 +24,7 @@
     "guid": "0.0.12",
     "immutable": "^3.8.2",
     "jquery": "^3.1.0",
-    "mathjs": "^5.1.1",
+    "mathjs": "^7.5.1",
     "moment": "^2.22.2"
   },
   "devDependencies": {
